@@ -7,15 +7,15 @@ set -euxo pipefail
 # Variable Declaration
 
 # DNS Setting
-if [ ! -d /etc/systemd/resolved.conf.d ]; then
-	sudo mkdir /etc/systemd/resolved.conf.d/
-fi
-cat <<EOF | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf
-[Resolve]
-DNS=${DNS_SERVERS}
-EOF
+#if [ ! -d /etc/systemd/resolved.conf.d ]; then
+#	sudo mkdir /etc/systemd/resolved.conf.d/
+#fi
+#cat <<EOF | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf
+#[Resolve]
+#DNS=${DNS_SERVERS}
+#EOF
 
-sudo systemctl restart systemd-resolved
+#sudo systemctl restart systemd-resolved
 
 # disable swap
 sudo swapoff -a
@@ -71,10 +71,24 @@ sudo apt-get install -y kubelet="$KUBERNETES_VERSION" kubectl="$KUBERNETES_VERSI
 sudo apt-get update -y
 sudo apt-get install -y jq
 
+sudo apt-get install -y \
+sudo \
+tmux \
+git \
+most \
+nano \
+curl \
+wget \
+net-tools \
+which
+
 # Disable auto-update services
 sudo apt-mark hold kubelet kubectl kubeadm cri-o
 
-sudo apt install virtualbox-guest-utils
+## Guest utilities
+#sudo apt install virtualbox-guest-utils
+sudo apt install -y build-essential dkms linux-headers-$(uname -r)
+
 
 ## set localip address in kubelet_extra_args
 local_ip="$(ip --json a s | jq -r '.[] | if .ifname == "eth1" then .addr_info[] | if .family == "inet" then .local else empty end else empty end')"
