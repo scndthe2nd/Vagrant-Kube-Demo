@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
       end
     end
     controlplane.vm.provider "virtualbox" do |vb|
-		vb.gui = true
+#		vb.gui = true
         vb.cpus = settings["nodes"]["control"]["cpu"]
         vb.memory = settings["nodes"]["control"]["memory"]
 		vb.default_nic_type = "virtio"
@@ -74,7 +74,7 @@ Vagrant.configure("2") do |config|
         end
       end
       node.vm.provider "virtualbox" do |vb|
-		  vb.gui = true
+#		  vb.gui = true
           vb.cpus = settings["nodes"]["workers"]["cpu"]
           vb.memory = settings["nodes"]["workers"]["memory"]
           if settings["cluster_name"] and settings["cluster_name"] != ""
