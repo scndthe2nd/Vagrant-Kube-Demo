@@ -1,0 +1,7 @@
+Define hypervisor role
+Define provisioner role
+Create hosts file
+Assign hosts to role
+Define hosts file location
+Add resources to hosts file
+Define containers

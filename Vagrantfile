@@ -1,4 +1,5 @@
 
+
 require "yaml"
 vagrant_root = File.dirname(File.expand_path(__FILE__))
 settings = YAML.load_file "#{vagrant_root}/settings.yaml"
@@ -30,6 +31,8 @@ Vagrant.configure("2") do |config|
     controlplane.vm.hostname = "controlplane"
     controlplane.vm.network "private_network", ip: settings["network"]["control_ip"]
     controlplane.vm.network "forwarded_port", guest: 8001, host: 8001
+    controlplane.vm.network "forwarded_port", guest: 6443, host: 6443
+#    controlplane.vm.disk :dvd, name: "installer",  file: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso"
     if settings["shared_folders"]
       settings["shared_folders"].each do |shared_folder|
         controlplane.vm.synced_folder shared_folder["host_path"], shared_folder["vm_path"]
@@ -67,6 +70,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "node0#{i}" do |node|
       node.vm.hostname = "node0#{i}"
+#      node.vm.disk :dvd, name: "installer",  file: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso"
       node.vm.network "private_network", ip: IP_NW + "#{IP_START + i}"
       if settings["shared_folders"]
         settings["shared_folders"].each do |shared_folder|
@@ -100,3 +104,4 @@ Vagrant.configure("2") do |config|
 
   end
 end 
+
