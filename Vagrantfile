@@ -23,6 +23,11 @@ Vagrant.configure("2") do |config|
   if `uname -m`.strip == "aarch64"
     config.vm.box = settings["software"]["box"] + "-arm64"
     else
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 42b6d145d0dcec3e8275c5436888dff298d9a987
     config.vm.box = settings["software"]["box"]
   end
   config.vm.box_check_update = true
@@ -127,6 +132,10 @@ Vagrant.configure("2") do |config|
   if `uname -m`.strip == "aarch64"
     config.vm.box = settings["software"]["box"] + "-arm64"
     else
+<<<<<<< HEAD
+=======
+>>>>>>> 451ef41e6f7043a4091074fc2837c212bda87114
+>>>>>>> 42b6d145d0dcec3e8275c5436888dff298d9a987
     config.vm.box = settings["software"]["box"]
   end
   config.vm.box_check_update = true
@@ -204,8 +213,16 @@ Vagrant.configure("2") do |config|
     if i == NUM_WORKER_NODES and settings["software"]["dashboard"] and settings["software"]["dashboard"] != ""
       node.vm.provision "shell", path: "scripts/dashboard.sh"
     end
+<<<<<<< HEAD
     node.vm.provision "file", source: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso", destination: "/opt/VBoxGuestAdditions.iso"
 
+=======
+<<<<<<< HEAD
+=======
+    node.vm.provision "file", source: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso", destination: "/opt/VBoxGuestAdditions.iso"
+
+>>>>>>> 451ef41e6f7043a4091074fc2837c212bda87114
+>>>>>>> 42b6d145d0dcec3e8275c5436888dff298d9a987
   end
   end
 end
