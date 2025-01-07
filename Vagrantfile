@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
   if `uname -m`.strip == "aarch64"
     config.vm.box = settings["software"]["box"] + "-arm64"
-      else
+    else
     config.vm.box = settings["software"]["box"]
   end
   config.vm.box_check_update = true
@@ -33,7 +33,6 @@ Vagrant.configure("2") do |config|
     controlplane.vm.network "private_network", ip: settings["network"]["control_ip"]
     controlplane.vm.network "forwarded_port", guest: 8001, host: 8001
     controlplane.vm.network "forwarded_port", guest: 6443, host: 6443
-#    controlplane.vm.disk :dvd, name: "installer",  file: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso"
     if settings["shared_folders"]
       settings["shared_folders"].each do |shared_folder|
         controlplane.vm.synced_folder shared_folder["host_path"], shared_folder["vm_path"]
@@ -65,8 +64,7 @@ Vagrant.configure("2") do |config|
         "SERVICE_CIDR" => settings["network"]["service_cidr"]
       },
       path: "scripts/master.sh"
-      controlplane.vm.provision "file", source: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso", destination: "/opt/VBoxGuestAdditions.iso"
-    end
+  end
 
   (1..NUM_WORKER_NODES).each do |i|
 
@@ -98,12 +96,10 @@ Vagrant.configure("2") do |config|
       path: "scripts/common.sh"
     node.vm.provision "shell", path: "scripts/node.sh"
 
-      # Only install the dashboard after provisioning the last worker (and when enabled).
-      if i == NUM_WORKER_NODES and settings["software"]["dashboard"] and settings["software"]["dashboard"] != ""
-        node.vm.provision "shell", path: "scripts/dashboard.sh"
-      end
+    # Only install the dashboard after provisioning the last worker (and when enabled).
+    if i == NUM_WORKER_NODES and settings["software"]["dashboard"] and settings["software"]["dashboard"] != ""
+      node.vm.provision "shell", path: "scripts/dashboard.sh"
     end
-
   end
-end 
-
+  end
+end
