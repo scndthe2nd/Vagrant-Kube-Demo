@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
         end
     end
     controlplane.vm.provision "file", source: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso", destination: "~/VBoxGuestAdditions.iso"
+    controlplane.vm.provision "shell", path: "scripts/virtualmachine.sh"
     controlplane.vm.provision "shell",
       env: {
         "DNS_SERVERS" => settings["network"]["dns_servers"].join(" "),
@@ -87,6 +88,7 @@ Vagrant.configure("2") do |config|
         end
     end
     node.vm.provision "file", source: "C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso", destination: "~/VBoxGuestAdditions.iso"
+    node.vm.provision "shell", path: "scripts/virtualmachine.sh"
     node.vm.provision "shell",
       env: {
         "DNS_SERVERS" => settings["network"]["dns_servers"].join(" "),
