@@ -1,5 +1,10 @@
 # Vagrant Demo Environment
 
+## Required tools
+https://download.virtualbox.org/virtualbox/7.1.4/Oracle_VirtualBox_Extension_Pack-7.1.4.vbox-extpack
+https://download.virtualbox.org/virtualbox/7.1.4/VBoxGuestAdditions_7.1.4.iso
+https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-Win.exe
+https://developer.hashicorp.com/vagrant/install
 
 ## NOTES
 This is a fork of the repo below. Please reference as needed. https://github.com/scriptcamp/vagrant-kubeadm-kubernetes.git
