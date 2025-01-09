@@ -6,6 +6,17 @@ metadata:
     app: nginx
     env: prod
 spec:
+  initContainers:    
+    - name: container-init
+      image: alpine
+      command:
+        - wget
+        - "-O"
+        - "/work-dir/index.html"
+        - "https://example.com/index.html"
+      volumeMounts:
+        - name: shared-volume
+          mountPath: /work-dir/
   containers:
     - name: container-write
       image: alpine
