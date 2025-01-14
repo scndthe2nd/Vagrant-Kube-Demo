@@ -38,3 +38,4 @@ Temporary Items
 *.key
 token
 key
+.vscode/settings.json
