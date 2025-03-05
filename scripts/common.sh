@@ -49,10 +49,7 @@ sudo sysctl --system
 ## Install CRIO Runtime
 
 sudo apt-get update -y
-apt-get install -y software-properties-common \
-curl \
-apt-transport-https \
-ca-certificates
+apt-get install -y software-properties-common curl apt-transport-https ca-certificates
 
 ## Needs a conditional operator in order to perform redeploy properly
 if [ ! -f /etc/apt/keyrings/cri-o-apt-keyring.gpg ] ; then
@@ -79,27 +76,10 @@ fi
 
 sudo apt-get update -y
 sudo apt-get install -y kubelet="$KUBERNETES_VERSION" kubectl="$KUBERNETES_VERSION" kubeadm="$KUBERNETES_VERSION"
-sudo apt-get install -y \
-sudo \
-tmux \
-git \
-most \
-nano \
-curl \
-wget \
-net-tools \
-which \
-jq \
-build-essential \
-dkms \
-linux-headers-$(uname -r) 
+sudo apt-get install -y sudo tmux git most nano curl wget net-tools which jq build-essential dkms linux-headers-$(uname -r) 
 
 # Disable auto-update services
-sudo apt-mark hold \
-kubelet \
-kubectl \
-kubeadm \
-cri-o
+sudo apt-mark hold kubelet kubectl kubeadm cri-o
 
 ## set localip address in kubelet_extra_args
 local_ip="$(ip --json a s | jq -r '.[] | if .ifname == "eth1" then .addr_info[] | if .family == "inet" then .local else empty end else empty end')"
